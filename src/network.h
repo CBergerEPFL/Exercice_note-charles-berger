@@ -4,7 +4,6 @@
 #include <vector>
 #include "random.h"
 
-
 /*!
   This is a network of nodes with bidirectional links: if <b>(a, b)</b> is a link then <b>(b, a)</b> is also a link.
 
