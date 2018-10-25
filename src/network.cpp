@@ -4,20 +4,38 @@
 
 void Network::resize(const size_t& a)
 {
-	values.resize(a,a);
+	if(not(values.empty()))
+	{
+		values.clear();
+	}
+	for(unsigned int i(0);i<a;i++)
+	{
+		values.push_back(i);
+	}
 }
 
 bool Network::add_link(const size_t& a, const size_t& b)
 {
-	if(a != b)
+if(not(values.empty()))
 	{
-		links.insert({a,b});
-		return true;
+		for(unsigned int i(1);i<values.size();i++)
+		{
+			if(((values[i] == b)or(values[i] == a)))
+			{
+				for(unsigned int j(1);j<values.size();j++)
+					{
+						if(((values[j] == b)or(values[j] == a)) and (a != b))
+							{
+								links.insert({a,b});
+								links.insert({b,a});
+								return true;
+							}
+							
+					}
+			}
+		}
 	}
-	else
-	{	
 	return false;
-	}
 }
 	
 
@@ -34,8 +52,9 @@ size_t Network::random_connect(const double& mean_deg)
 			RandomNumbers b;
 			size_t a(b.poisson(mean_deg) % values.size());
 			add_link(a,x);
-			return links.size();
+			
 		}
+		return links.size();
 	}
 	std::cout<<"Le tableau de valeur est vide"<<std::endl;
 	return links.size();
@@ -104,12 +123,23 @@ std::vector<size_t> Network::neighbors(const size_t& a) const
 			{
 				voisin.push_back(x.second);
 			}
-			if((x.second == a))
+			if(x.second == a)
 			{
 				voisin.push_back(x.first);
 			}
 		}
-		
+		for(unsigned int i(0);i<voisin.size();i++)
+		{
+			for(unsigned int j(i+1);j<voisin.size();j++)
+			{
+				if(voisin[i] == voisin[j])
+				{
+					voisin.erase(voisin.begin()+j);
+					
+				}
+			}
+		}
+		std::reverse(voisin.begin(),voisin.end());
 		return voisin;
 	}
 	std::cout<<"Le tableau est vide"<<std::endl;
