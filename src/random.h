@@ -1,5 +1,3 @@
-#ifndef RANDOM_HPP
-#define RANDOM_HPP
 #include <random>
 #include <vector>
 #include <algorithm>
@@ -35,6 +33,9 @@ public:
     int poisson(double mean=1);
     void uniform_int(std::vector<int>&, int lower=0, int upper=100);
 ///@}
+/*!
+  Shuffle take a vector of *size_t* and re-orders it randomly.
+ */
     void shuffle(std::vector<size_t> &_v) {std::shuffle(_v.begin(), _v.end(), rng);}
      
 private:
@@ -44,5 +45,3 @@ private:
 };
 
 extern RandomNumbers RNG;
-
-#endif

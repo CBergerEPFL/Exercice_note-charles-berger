@@ -30,9 +30,9 @@ TEST(networkTest, connect) {
     EXPECT_EQ(ngb.size(), 3);
     EXPECT_TRUE(ngb[0]==10 && ngb[1]==8 && ngb[2]==1);
     double numlink = 0;
-    for(int rep = 0;rep<100;rep++)
-    numlink += 0.01*net.random_connect(2);
-    EXPECT_NEAR(numlink, 200, 5);
+    for (int rep=0; rep<100; rep++) 
+      numlink += 0.01*net.random_connect(2);
+    EXPECT_NEAR(numlink, 200, 15);
 }
 
 TEST(networkTest, values) {

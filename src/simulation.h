@@ -1,5 +1,3 @@
-#ifndef SIMULATION_HPP
-#define SIMULATION_HPP
 #include <tclap/CmdLine.h>
 
 class Network;
@@ -36,5 +34,3 @@ private:
 
 
 };
-
-#endif
