@@ -4,27 +4,37 @@
 
 void Network::resize(const size_t& a)
 {
+	/*
+	RandomNumbers rng;
+	if(not(values.empty()))
+	{
+		values.clear();				Programme faisant un remplissage aleatoire.Neanmoins,Probleme avec les tests : Lors d'un premier passage,certain tests passaient et d'autre non.Lors d'un deuxieme passage,l'inverse se produit
+	}
+	values.resize(a);
+	rng.normal(values);
+	*/
 	if(not(values.empty()))
 	{
 		values.clear();
 	}
+	values.resize(a);
 	for(unsigned int i(0);i<a;i++)
 	{
-		values.push_back(i);
+		values[i] = i;
 	}
 }
 
 bool Network::add_link(const size_t& a, const size_t& b)
 {
-if(not(values.empty()))
+if(not(values.empty()) and a!=b)
 	{
-		for(unsigned int i(1);i<values.size();i++)
+		for(unsigned int i(0);i<values.size();i++)
 		{
-			if(((values[i] == b)or(values[i] == a)))
+			if((values[i] == b)or(values[i] == b))
 			{
-				for(unsigned int j(1);j<values.size();j++)
+				for(unsigned int j(0);j<values.size();j++)
 					{
-						if(((values[j] == b)or(values[j] == a)) and (a != b))
+						if(((values[j] == b)or(values[j] == a)))
 							{
 								links.insert({a,b});
 								links.insert({b,a});
@@ -35,7 +45,9 @@ if(not(values.empty()))
 			}
 		}
 	}
-	return false;
+
+return false;
+
 }
 	
 
