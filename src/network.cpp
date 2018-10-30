@@ -1,18 +1,24 @@
 #include "network.h"
 #include <algorithm>
 #include <iostream>
+#include "random.h"
 
 void Network::resize(const size_t& a)
 {
-	/*
+	
 	RandomNumbers rng;
 	if(not(values.empty()))
 	{
-		values.clear();				Programme faisant un remplissage aleatoire.Neanmoins,Probleme avec les tests : Lors d'un premier passage,certain tests passaient et d'autre non.Lors d'un deuxieme passage,l'inverse se produit
+		values.clear();				//Programme faisant un remplissage aleatoire.Neanmoins,Probleme avec les tests : Lors d'un premier passage,certain tests passaient et d'autre non.Lors d'un deuxieme passage,l'inverse se produit.Parfois tout les test passent
 	}
 	values.resize(a);
-	rng.normal(values);
-	*/
+	for(unsigned int i(0);i<values.size();i++)
+	{
+		values[i] = (int(rng.normal(i+1)))%a;
+	}
+	
+	
+	/*
 	if(not(values.empty()))
 	{
 		values.clear();
@@ -22,6 +28,7 @@ void Network::resize(const size_t& a)
 	{
 		values[i] = i;
 	}
+	*/
 }
 
 bool Network::add_link(const size_t& a, const size_t& b)
