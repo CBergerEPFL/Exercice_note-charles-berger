@@ -35,11 +35,12 @@ bool Network::add_link(const size_t& a, const size_t& b)
 {
 if(not(values.empty()) and a!=b)
 	{
-		for(unsigned int i(0);i<values.size();i++)
+		const size_t x(values.size());
+		for(unsigned int i(0);i<x;i++)
 		{
 			if((values[i] == b)or(values[i] == b))
 			{
-				for(unsigned int j(0);j<values.size();j++)
+				for(unsigned int j(0);j<x;j++)
 					{
 						if(((values[j] == b)or(values[j] == a)))
 							{
@@ -86,14 +87,34 @@ size_t Network::set_values(const std::vector<double>& a)
 {
 	if(not(a.empty()))
 	{
-		values = a;
-		return values.size();
+		const size_t  x(values.size()),y(a.size());
+		if(x>y)
+		{
+			for(unsigned int i(0);i<y;i++)
+			{
+				values[i] = a[i];
+			}
+			return a.size();
+		}
+		if(y<x)
+		{
+			for(unsigned int i(0);i<x;i++)
+			{
+				values[i] = a[i];
+			}
+			return a.size();
+		}
+		if(x == y)
+		{
+			values = a;
+			return a.size();
+		}
+		
 	}
-	else
-	{
-		std::cout<<"Votre tableau est vide"<<std::endl;
-		return 0;
-	}
+	
+	std::cout<<"Votre tableau est vide"<<std::endl;
+	return 0;
+
 	
 }
 
