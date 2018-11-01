@@ -96,7 +96,7 @@ size_t Network::set_values(const std::vector<double>& a)
 			}
 			return a.size();
 		}
-		if(y<x)
+		if(x<y)
 		{
 			for(unsigned int i(0);i<x;i++)
 			{
@@ -114,13 +114,17 @@ size_t Network::set_values(const std::vector<double>& a)
 	
 	std::cout<<"Votre tableau est vide"<<std::endl;
 	return 0;
-
-	
 }
+
 
 size_t Network::size() const
 {
-	return values.size();
+	if(not(values.empty()))
+	{
+		return values.size();
+	}
+	std::cout<<"Le tableau est vide"<<std::endl;
+	return 0;
 }
 
 size_t Network::degree(const size_t& n) const
@@ -146,10 +150,15 @@ double Network::value(const size_t& n) const
 
 std::vector<double> Network::sorted_values() const
 {
-	std::vector<double> copie_value(values);
-	std::sort(copie_value.begin(),copie_value.end());
-	std::reverse(copie_value.begin(),copie_value.end());
-	return copie_value;
+	if(not(values.empty()))
+	{
+		std::vector<double> copie_value(values);
+		std::sort(copie_value.begin(),copie_value.end());
+		std::reverse(copie_value.begin(),copie_value.end());
+		return copie_value;
+	}
+	std::cout<<"le tableau est vide"<<std::endl;
+	return values;
 }
 
 std::vector<size_t> Network::neighbors(const size_t& a) const
