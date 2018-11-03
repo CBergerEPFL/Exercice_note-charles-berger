@@ -9,26 +9,10 @@ void Network::resize(const size_t& a)
 	RandomNumbers rng;
 	if(not(values.empty()))
 	{
-		values.clear();				//Programme faisant un remplissage aleatoire.Neanmoins,Probleme avec les tests : Lors d'un premier passage,certain tests passaient et d'autre non.Lors d'un deuxieme passage,l'inverse se produit.Parfois tout les test passent
+		values.clear();	
 	}
 	values.resize(a);
-	for(unsigned int i(0);i<values.size();i++)
-	{
-		values[i] = (int(rng.normal(i+1)))%a;
-	}
-	
-	
-	/*
-	if(not(values.empty()))
-	{
-		values.clear();
-	}
-	values.resize(a);
-	for(unsigned int i(0);i<a;i++)
-	{
-		values[i] = i;
-	}
-	*/
+	rng.normal(values);
 }
 
 bool Network::add_link(const size_t& a, const size_t& b)
@@ -38,11 +22,11 @@ if(not(values.empty()) and a!=b)
 		const size_t x(values.size());
 		for(unsigned int i(0);i<x;i++)
 		{
-			if((values[i] == b)or(values[i] == b))
+			if(i ==a)
 			{
 				for(unsigned int j(0);j<x;j++)
 					{
-						if(((values[j] == b)or(values[j] == a)))
+						if((j == b))
 							{
 								links.insert({a,b});
 								links.insert({b,a});
@@ -67,12 +51,11 @@ size_t Network::random_connect(const double& mean_deg)
 	}
 	if(not(values.empty()))
 	{
-		for(auto x : values)
+		for(unsigned int i(0);i<values.size();i++)
 		{
 			RandomNumbers b;
 			size_t a(b.poisson(mean_deg) % values.size());
-			add_link(a,x);
-			
+			add_link(a,i);
 		}
 		return links.size();
 	}
