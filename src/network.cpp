@@ -51,9 +51,9 @@ size_t Network::random_connect(const double& mean_deg)
 	}
 	if(not(values.empty()))
 	{
+		RandomNumbers b;
 		for(unsigned int i(0);i<values.size();i++)
 		{
-			RandomNumbers b;
 			size_t a(b.poisson(mean_deg) % values.size());
 			add_link(a,i);
 		}
